@@ -1,0 +1,50 @@
+﻿#Requires -Version 5.1
+<#
+.SYNOPSIS
+    SharePoint Online Permissions Report Tool
+.DESCRIPTION
+    Simple tool for SharePoint Online permissions analysis with persistent authentication
+#>
+
+Add-Type -AssemblyName PresentationFramework
+Add-Type -AssemblyName System.Windows.Forms
+
+# Import functions
+. "$PSScriptRoot\Functions\Core\Settings.ps1"
+. "$PSScriptRoot\Functions\Core\Logging.ps1"
+. "$PSScriptRoot\Functions\UI\UIManager.ps1"
+. "$PSScriptRoot\Functions\SharePoint\SPOConnection.ps1"
+. "$PSScriptRoot\Functions\UI\MainWindow.ps1"
+
+# Global variables
+$script:SPOConnected = $false
+$script:SPOContext = $null
+
+# Initialize settings
+Initialize-Settings
+
+try {
+    Write-Host "Starting SharePoint Permissions Tool..." -ForegroundColor Green
+    
+    # Show main window
+    Show-MainWindow
+}
+catch {
+    Write-ErrorLog -Message $_.Exception.Message -Location "Main"
+    [System.Windows.MessageBox]::Show(
+        "Failed to start application: $($_.Exception.Message)", 
+        "Error", 
+        [System.Windows.MessageBoxButton]::OK, 
+        [System.Windows.MessageBoxImage]::Error
+    )
+}
+finally {
+    # Cleanup
+    if ($script:SPOConnected) {
+        try {
+            Disconnect-PnPOnline -ErrorAction SilentlyContinue
+        } catch {
+            # Ignore cleanup errors
+        }
+    }
+}
