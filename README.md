@@ -191,6 +191,9 @@ Examples of supported URLs:
 ├── 🚀 Start-SPOTool.ps1              # Main application entry point
 ├── ⚙️ Install-Prerequisites.ps1      # Automated setup script
 ├── 📖 README.md                     # This documentation
+├── 📂 Views/                        
+│   ├── 📂 Windows/
+│   │   └── MainWindow.xaml          # ← Main window XAML
 ├── 📂 Functions/                    # Core functionality
 │   ├── 📂 Core/                    # Foundation components
 │   │   ├── Settings.ps1            # In-memory settings management
@@ -199,7 +202,11 @@ Examples of supported URLs:
 │   │   └── SPOConnection.ps1       # Authentication and data retrieval
 │   └── 📂 UI/                      # User interface
 │       ├── UIManager.ps1           # UI state management
-│       └── MainWindow.ps1          # Primary application window
+│       ├── MainWindow.ps1           # Main window loader & coordinator
+│       ├── ConnectionTab.ps1        # Connection tab logic
+│       ├── OperationsTab.ps1        # SharePoint Operations tab logic
+│       ├── VisualAnalyticsTab.ps1   # Visual Analytics tab logic
+│       └── HelpTab.ps1             # Help tab logic (minimal)
 ├── 📂 Logs/                        # Application logs (created automatically)
 └── 📂 Reports/                     # Generated reports (created automatically)
     └── Generated/                  # Output directory

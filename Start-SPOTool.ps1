@@ -14,6 +14,10 @@ Add-Type -AssemblyName System.Windows.Forms
 . "$PSScriptRoot\Functions\Core\Logging.ps1"
 . "$PSScriptRoot\Functions\UI\UIManager.ps1"
 . "$PSScriptRoot\Functions\SharePoint\SPOConnection.ps1"
+. "$PSScriptRoot\Functions\UI\ConnectionTab.ps1"
+. "$PSScriptRoot\Functions\UI\OperationsTab.ps1"
+. "$PSScriptRoot\Functions\UI\VisualAnalyticsTab.ps1"
+. "$PSScriptRoot\Functions\UI\HelpTab.ps1"
 . "$PSScriptRoot\Functions\UI\MainWindow.ps1"
 
 # Global variables
