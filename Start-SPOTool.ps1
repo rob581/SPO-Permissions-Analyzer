@@ -21,6 +21,9 @@ Add-Type -AssemblyName System.Windows.Forms
 . "$PSScriptRoot\Functions\UI\HelpTab.ps1"
 . "$PSScriptRoot\Functions\UI\MainWindow.ps1"
 
+# DeepDive
+. "$PSScriptRoot\Functions\UI\\DeepDive\SitesDeepDive.ps1"
+
 # Global variables
 $script:SPOConnected = $false
 $script:SPOContext = $null

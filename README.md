@@ -194,6 +194,11 @@ Examples of supported URLs:
 ├── 📂 Views/                        
 │   ├── 📂 Windows/
 │   │   └── MainWindow.xaml          # ← Main window XAML
+│   └── 📂 DeepDive/                     
+│       ├── SitesDeepDive.xaml           # Sites deep dive window
+│       ├── UsersDeepDive.xaml           # (future) Users deep dive
+│       ├── GroupsDeepDive.xaml          # (future) Groups deep dive
+│       └── ExternalUsersDeepDive.xaml   # (future) External users deep dive
 ├── 📂 Functions/                    # Core functionality
 │   ├── 📂 Core/                    # Foundation components
 │   │   ├── Settings.ps1            # In-memory settings management
@@ -208,6 +213,11 @@ Examples of supported URLs:
 │       ├── OperationsTab.ps1        # SharePoint Operations tab logic
 │       ├── VisualAnalyticsTab.ps1   # Visual Analytics tab logic
 │       └── HelpTab.ps1             # Help tab logic (minimal)
+│       └── 📂 DeepDive/                  #
+│           ├── SitesDeepDive.ps1        # Sites deep dive logic
+│           ├── UsersDeepDive.ps1        # (future)
+│           ├── GroupsDeepDive.ps1       # (future)
+│           └── ExternalUsersDeepDive.ps1 # (future)
 ├── 📂 Logs/                        # Application logs (created automatically)
 └── 📂 Reports/                     # Generated reports (created automatically)
     └── Generated/                  # Output directory

@@ -9,6 +9,9 @@ function Initialize-VisualAnalyticsTab {
         $script:btnRefreshAnalytics.Add_Click({
             Update-VisualAnalyticsFromData
         })
+
+        # Make metric tiles clickable
+        Make-MetricTilesClickable
         
         # Initialize with empty state
         Reset-VisualAnalytics
@@ -18,6 +21,96 @@ function Initialize-VisualAnalyticsTab {
     catch {
         Write-ActivityLog "Failed to initialize Visual Analytics tab: $($_.Exception.Message)" -Level "Error"
         throw
+    }
+}
+
+function Make-MetricTilesClickable {
+    <#
+    .SYNOPSIS
+    Makes the metric tiles clickable to open deep dive windows
+    #>
+    try {
+        # Find the metric card borders (parent containers of the metrics)
+        $gridMetricsCards = $script:MainWindow.FindName("gridMetricsCards")
+        
+        if ($gridMetricsCards) {
+            # Total Sites Card (Column 0)
+            $sitesCard = $gridMetricsCards.Children | Where-Object { 
+                [System.Windows.Controls.Grid]::GetColumn($_) -eq 0 
+            }
+            if ($sitesCard) {
+                $sitesCard.Cursor = [System.Windows.Input.Cursors]::Hand
+                $sitesCard.Add_MouseLeftButtonUp({
+                    Open-SitesDeepDive
+                })
+                $sitesCard.Add_MouseEnter({
+                    $this.Opacity = 0.8
+                })
+                $sitesCard.Add_MouseLeave({
+                    $this.Opacity = 1.0
+                })
+            }
+            
+            # Total Users Card (Column 1)
+            $usersCard = $gridMetricsCards.Children | Where-Object { 
+                [System.Windows.Controls.Grid]::GetColumn($_) -eq 1 
+            }
+            if ($usersCard) {
+                $usersCard.Cursor = [System.Windows.Input.Cursors]::Hand
+                $usersCard.Add_MouseLeftButtonUp({
+                    Open-UsersDeepDive
+                })
+                $usersCard.Add_MouseEnter({
+                    $this.Opacity = 0.8
+                })
+                $usersCard.Add_MouseLeave({
+                    $this.Opacity = 1.0
+                })
+            }
+            
+            # Total Groups Card (Column 2)
+            $groupsCard = $gridMetricsCards.Children | Where-Object { 
+                [System.Windows.Controls.Grid]::GetColumn($_) -eq 2 
+            }
+            if ($groupsCard) {
+                $groupsCard.Cursor = [System.Windows.Input.Cursors]::Hand
+                $groupsCard.Add_MouseLeftButtonUp({
+                    Open-GroupsDeepDive
+                })
+                $groupsCard.Add_MouseEnter({
+                    $this.Opacity = 0.8
+                })
+                $groupsCard.Add_MouseLeave({
+                    $this.Opacity = 1.0
+                })
+            }
+            
+            # External Users Card (Column 3)
+            $externalCard = $gridMetricsCards.Children | Where-Object { 
+                [System.Windows.Controls.Grid]::GetColumn($_) -eq 3 
+            }
+            if ($externalCard) {
+                $externalCard.Cursor = [System.Windows.Input.Cursors]::Hand
+                $externalCard.Add_MouseLeftButtonUp({
+                    Open-ExternalUsersDeepDive
+                })
+                $externalCard.Add_MouseEnter({
+                    $this.Opacity = 0.8
+                })
+                $externalCard.Add_MouseLeave({
+                    $this.Opacity = 1.0
+                })
+            }
+            
+            Write-ActivityLog "Metric tiles made clickable" -Level "Information"
+        }
+        else {
+            Write-ActivityLog "Could not find metrics cards grid" -Level "Warning"
+        }
+        
+    }
+    catch {
+        Write-ActivityLog "Error making metric tiles clickable: $($_.Exception.Message)" -Level "Warning"
     }
 }
 
@@ -479,5 +572,145 @@ function Show-DemoAnalytics {
     }
     catch {
         Write-ActivityLog "Error showing demo analytics: $($_.Exception.Message)" -Level "Error"
+    }
+}
+
+function Open-SitesDeepDive {
+    <#
+    .SYNOPSIS
+    Opens the Sites deep dive window
+    #>
+    try {
+        Write-ActivityLog "Opening Sites deep dive from Visual Analytics" -Level "Information"
+        
+        # Check if we have data
+        $sites = Get-SharePointData -DataType "Sites"
+        
+        if ($sites.Count -eq 0) {
+            [System.Windows.MessageBox]::Show(
+                "No sites data available. Please run 'Get All Sites' first.",
+                "No Data",
+                [System.Windows.MessageBoxButton]::OK,
+                [System.Windows.MessageBoxImage]::Information
+            )
+            return
+        }
+        
+        # Load the deep dive module if not already loaded
+        $deepDivePath = Join-Path $PSScriptRoot "DeepDive\SitesDeepDive.ps1"
+        if (Test-Path $deepDivePath) {
+            . $deepDivePath
+        }
+        else {
+            # Try alternative path
+            $deepDivePath = Join-Path (Split-Path -Parent $PSScriptRoot) "UI\DeepDive\SitesDeepDive.ps1"
+            if (Test-Path $deepDivePath) {
+                . $deepDivePath
+            }
+        }
+        
+        # Show the deep dive window
+        Show-SitesDeepDive
+        
+    }
+    catch {
+        Write-ErrorLog -Message $_.Exception.Message -Location "Open-SitesDeepDive"
+        [System.Windows.MessageBox]::Show(
+            "Failed to open Sites deep dive: $($_.Exception.Message)",
+            "Error",
+            [System.Windows.MessageBoxButton]::OK,
+            [System.Windows.MessageBoxImage]::Error
+        )
+    }
+}
+function Open-UsersDeepDive {
+    <#
+    .SYNOPSIS
+    Opens the Users deep dive window (placeholder for future implementation)
+    #>
+    try {
+        [System.Windows.MessageBox]::Show(
+            "Users Deep Dive coming soon!`n`nThis will show:`n• Detailed user list`n• Permission levels`n• External vs Internal users`n• User activity analysis`n• Security recommendations",
+            "Coming Soon",
+            [System.Windows.MessageBoxButton]::OK,
+            [System.Windows.MessageBoxImage]::Information
+        )
+    }
+    catch {
+        Write-ErrorLog -Message $_.Exception.Message -Location "Open-UsersDeepDive"
+    }
+}
+
+function Open-GroupsDeepDive {
+    <#
+    .SYNOPSIS
+    Opens the Groups deep dive window (placeholder for future implementation)
+    #>
+    try {
+        [System.Windows.MessageBox]::Show(
+            "Groups Deep Dive coming soon!`n`nThis will show:`n• Group memberships`n• Nested groups analysis`n• Permission inheritance`n• Group owner details`n• Recommendations",
+            "Coming Soon",
+            [System.Windows.MessageBoxButton]::OK,
+            [System.Windows.MessageBoxImage]::Information
+        )
+    }
+    catch {
+        Write-ErrorLog -Message $_.Exception.Message -Location "Open-GroupsDeepDive"
+    }
+}
+function Open-ExternalUsersDeepDive {
+    <#
+    .SYNOPSIS
+    Opens the External Users deep dive window (placeholder for future implementation)
+    #>
+    try {
+        [System.Windows.MessageBox]::Show(
+            "External Users Deep Dive coming soon!`n`nThis will show:`n• External user details`n• Access levels`n• Sharing links`n• Guest user activity`n• Security audit trail",
+            "Coming Soon",
+            [System.Windows.MessageBoxButton]::OK,
+            [System.Windows.MessageBoxImage]::Information
+        )
+    }
+    catch {
+        Write-ErrorLog -Message $_.Exception.Message -Location "Open-ExternalUsersDeepDive"
+    }
+}
+function Add-ClickableTooltips {
+    <#
+    .SYNOPSIS
+    Adds tooltips to metric tiles to indicate they're clickable
+    #>
+    try {
+        if ($script:txtTotalSites) {
+            [System.Windows.Controls.ToolTipService]::SetToolTip(
+                $script:txtTotalSites.Parent.Parent,
+                "Click for detailed sites analysis"
+            )
+        }
+        
+        if ($script:txtTotalUsers) {
+            [System.Windows.Controls.ToolTipService]::SetToolTip(
+                $script:txtTotalUsers.Parent.Parent,
+                "Click for detailed users analysis"
+            )
+        }
+        
+        if ($script:txtTotalGroups) {
+            [System.Windows.Controls.ToolTipService]::SetToolTip(
+                $script:txtTotalGroups.Parent.Parent,
+                "Click for detailed groups analysis"
+            )
+        }
+        
+        if ($script:txtExternalUsers) {
+            [System.Windows.Controls.ToolTipService]::SetToolTip(
+                $script:txtExternalUsers.Parent.Parent,
+                "Click for external users analysis"
+            )
+        }
+        
+    }
+    catch {
+        Write-ActivityLog "Error adding tooltips: $($_.Exception.Message)" -Level "Warning"
     }
 }
