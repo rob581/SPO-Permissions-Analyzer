@@ -1,1 +1,21 @@
-﻿
+﻿[2026-01-14 06:55:44] [Get-RealPermissions-DataDriven] Unexpected response from the server. The content type of the response is "". The status code is "NotFound".
+[2026-01-14 06:59:16] [Show-MainWindow] Exception calling "ShowDialog" with "0" argument(s): "The term 'Generate-RealReport-DataDriven' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again."
+[2026-01-14 06:59:16] [Main] Exception calling "ShowDialog" with "0" argument(s): "The term 'Generate-RealReport-DataDriven' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again."
+[2026-01-14 07:05:32] [Show-MainWindow] Exception calling "ShowDialog" with "0" argument(s): "The term 'Generate-DemoReport-DataDriven' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again."
+[2026-01-14 07:05:32] [Main] Exception calling "ShowDialog" with "0" argument(s): "The term 'Generate-DemoReport-DataDriven' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again."
+[2026-01-14 07:08:31] [Show-MainWindow] Exception calling "ShowDialog" with "0" argument(s): "The term 'Generate-DemoReport-DataDriven' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again."
+[2026-01-14 07:08:31] [Main] Exception calling "ShowDialog" with "0" argument(s): "The term 'Generate-DemoReport-DataDriven' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again."
+[2026-01-14 07:35:39] [Show-MainWindow] Exception calling "ShowDialog" with "0" argument(s): "The term 'Generate-DemoReport-DataDriven' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again."
+[2026-01-14 07:35:39] [Main] Exception calling "ShowDialog" with "0" argument(s): "The term 'Generate-DemoReport-DataDriven' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again."
+[2026-01-14 07:41:28] [Show-MainWindow] Exception calling "ShowDialog" with "0" argument(s): "Demo report generation failed: The term 'Parse-ConsoleOutputAndUpdateAnalytics' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again."
+[2026-01-14 07:41:28] [Main] Exception calling "ShowDialog" with "0" argument(s): "Demo report generation failed: The term 'Parse-ConsoleOutputAndUpdateAnalytics' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again."

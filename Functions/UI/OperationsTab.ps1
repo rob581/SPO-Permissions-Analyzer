@@ -28,9 +28,9 @@ function Initialize-OperationsTab {
         
         $script:btnGenerateReport.Add_Click({ 
             if (Get-AppSetting -SettingName "DemoMode") {
-                Generate-DemoReport-DataDriven
+                Generate-DemoReport
             } else {
-                Generate-RealReport-DataDriven
+                Generate-RealReport
             }
         })
         
